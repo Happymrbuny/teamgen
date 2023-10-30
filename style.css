@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: inherit;
     font-family: Courier, monospace;
+    font-size: 24px;
 }
 
 /* Header */
@@ -34,11 +35,10 @@ body {
 /* New Team Entry Form */
 .form_addPlayer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-items: stretch;
     row-gap: 12px;
     column-gap: 4px;
-    width: 900px;
     margin-bottom: 40px;
 }
 
@@ -73,21 +73,23 @@ body {
 }
 
 /* Members Display */
-.playerContainer {
-    font-size: 12px;
-}
-
-.playerContainer-player {
-    font-size: 24px;
-}
-
 .playerContainer-teamDiv {
     margin-top: 15px;
-    font-size: 24px;
 }
 
 .playerContainer-out {
     margin-top: 15px;
-    font-size: 24px;
     font-weight: bold;
+}
+
+.playerContainer-removeBtn {
+    background-color: rgb(237, 185, 185);
+    margin-left: 15px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0px;
+    font-size: 16px;
 }

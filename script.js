@@ -23,7 +23,6 @@ const allPlayers = [];
 // Generate teams
 generateTeamsBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    console.log('Generate Teams button pressed.');
     const teams = [];
     const noTeams = teamCount.value;
     const tempMembers = [...allPlayers];
@@ -33,7 +32,7 @@ generateTeamsBtn.addEventListener('click', function (e) {
     const randMember = (tempMembers) => console.log(tempMembers);
     Math.floor(Math.random() * tempMembers);
 
-    // If no inputs
+    // If missing inputs
     if (!noTeams || !tempMembers.length)
         displayMessage.textContent = 'ADD PLAYERS AND SELECT NUMBER OF TEAMS';
     else if (noTeams > tempMembers.length) {
@@ -81,12 +80,7 @@ addPlayerBtn.addEventListener('click', function (e) {
 // Remove all user input values and reset UI
 resetBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    allPlayers.length = 0;
-    playerContainer.textContent = '';
-    displayMessage.textContent = 'ADD PLAYERS TO BEGIN';
-    playerInput.value = '';
-    teamCount.value = '';
-    oddPlayerOpt.selectedIndex = 0;
+    resetUI();
 });
 
 // Update display
@@ -97,7 +91,7 @@ const displayAllPlayers = function () {
 
     allPlayers.forEach(function (player) {
         const html = `
-        <div class='playerContainer-player'>${player}</div>`;
+        <p class='playerContainer-${player}'>${player}<button class='playerContainer-removeBtn'>X</button></p>`;
 
         playerContainer.insertAdjacentHTML('beforeend', html);
     });
@@ -106,7 +100,7 @@ const displayAllPlayers = function () {
 // When teams are generated
 const displayTeams = function (teams, out) {
     playerContainer.style.display = 'grid';
-    playerContainer.style.gridTemplateColumns = `repeat(${teams.length}, 1fr)`;
+    playerContainer.style.gridTemplateColumns = `repeat(3, 1fr)`;
     playerContainer.innerHTML = '';
 
     teams.forEach(function (team, i) {
@@ -125,4 +119,12 @@ const displayTeams = function (teams, out) {
 };
 
 // Reset UI
-const resetUI = function () {};
+const resetUI = function () {
+    allPlayers.length = 0;
+    playerInput.value = '';
+    teamCount.value = '';
+    oddPlayerOpt.selectedIndex = 0;
+    displayMessage.textContent = 'ADD PLAYERS TO BEGIN';
+    playerContainer.textContent = '';
+    playerContainer.style.display = 'block';
+};
