@@ -77,6 +77,11 @@ addPlayerBtn.addEventListener('click', function (e) {
     playerInput.value = '';
 });
 
+const removePlayer = function (i) {
+    allPlayers.splice(i, 1);
+    displayAllPlayers();
+};
+
 // Remove all user input values and reset UI
 resetBtn.addEventListener('click', function (e) {
     e.preventDefault();
@@ -89,9 +94,9 @@ const displayAllPlayers = function () {
     playerContainer.innerHTML = '';
     displayMessage.textContent = 'PLAYERS ADDED:';
 
-    allPlayers.forEach(function (player) {
+    allPlayers.forEach(function (player, i) {
         const html = `
-        <p class='playerContainer-${player}'>${player}<button class='playerContainer-removeBtn'>X</button></p>`;
+        <p class='playerContainer-${player}'>${player}<button class='playerContainer-removeBtn' onclick='removePlayer(${i})'>X</button></p>`;
 
         playerContainer.insertAdjacentHTML('beforeend', html);
     });
