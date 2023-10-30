@@ -70,9 +70,10 @@ generateTeamsBtn.addEventListener('click', function (e) {
 addPlayerBtn.addEventListener('click', function (e) {
     e.preventDefault();
     const playerName = playerInput.value.toUpperCase();
-    playerName.length === !0 &&
-        allPlayers.push(playerName) &&
+    if (playerName.length > 0) {
+        allPlayers.push(playerName);
         displayAllPlayers(allPlayers);
+    }
     playerInput.select();
     playerInput.value = '';
 });
