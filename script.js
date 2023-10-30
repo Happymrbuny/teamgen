@@ -1,16 +1,17 @@
 'use strict';
 
 // Elements
-// Inputs
+// Input Elements
 const playerInput = document.querySelector('.form_input-addPlayer');
 const teamCount = document.querySelector('.form_input-teamCount');
 const oddPlayerOpt = document.querySelector('.form_select-oddPlayer');
 
-// Buttons
+// Button Elements
 const addPlayerBtn = document.querySelector('.form_btn-addPlayer');
 const generateTeamsBtn = document.querySelector('.form_btn-generateTeams');
+const resetBtn = document.querySelector('.form_btn-reset');
 
-//Display
+//Display Elements
 const playerContainer = document.querySelector('.playerContainer');
 const displayMessage = document.querySelector('.displayMessage');
 
@@ -27,17 +28,24 @@ generateTeamsBtn.addEventListener('click', function (e) {
     const noTeams = teamCount.value;
     const tempMembers = [...allPlayers];
     const oddPlayerOut = oddPlayerOpt.value === 'out' ? true : false;
+    const out = [];
     // Randome member selector function
     const randMember = (tempMembers) => console.log(tempMembers);
     Math.floor(Math.random() * tempMembers);
 
+    // If no inputs
+    if (!noTeams || !tempMembers.length)
+        displayMessage.textContent = 'ADD PLAYERS AND SELECT NUMBER OF TEAMS';
+    else if (noTeams > tempMembers.length) {
+        displayMessage.textContent =
+            'NOT ENOUGH PLAYERS TO FILL TEAMS - ADD MORE PLAYERS OR REDUCE NUMBER OF TEAMS';
+    }
     // If inputs are complete
-    if (noTeams && tempMembers.length) {
+    else {
         // Determine size of each team
         const teamSize = Math.floor(allPlayers.length / noTeams);
         // Create array for each team inside team array
         for (let i = 0; teams.length < noTeams; i++) {
-            console.log(`Creating team ${i}`);
             teams[i] = [];
             // Assign members to each team until team size is reached
             while (teams[i].length < teamSize) {
@@ -46,10 +54,7 @@ generateTeamsBtn.addEventListener('click', function (e) {
                 );
             }
         }
-        if (oddPlayerOut) {
-            // Display teams and out players
-            console.log(`Out: ${tempMembers}`);
-        } else {
+        if (!oddPlayerOut) {
             // Assign remaining players to random teams
             for (let i = 0; tempMembers.length > 0; i++) {
                 teams[i].push(
@@ -57,20 +62,30 @@ generateTeamsBtn.addEventListener('click', function (e) {
                 );
             }
         }
-        displayTeams(teams);
-    } else {
-        console.log('Please fill in all fields');
+        displayTeams(teams, tempMembers);
     }
 });
 
-// Accept player name as input and display in the playersContainer.
+// Accept player name as input. Display in the playersContainer.
 addPlayerBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    const playerName = playerInput.value;
-    allPlayers.push(playerName);
-    displayAllPlayers(allPlayers);
+    const playerName = playerInput.value.toUpperCase();
+    playerName.length === !0 &&
+        allPlayers.push(playerName) &&
+        displayAllPlayers(allPlayers);
     playerInput.select();
     playerInput.value = '';
+});
+
+// Remove all user input values and reset UI
+resetBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    allPlayers.length = 0;
+    playerContainer.textContent = '';
+    displayMessage.textContent = 'ADD PLAYERS TO BEGIN';
+    playerInput.value = '';
+    teamCount.value = '';
+    oddPlayerOpt.selectedIndex = 0;
 });
 
 // Update display
@@ -88,8 +103,7 @@ const displayAllPlayers = function () {
 };
 
 // When teams are generated
-const displayTeams = function (teams) {
-    console.log('displaying teams');
+const displayTeams = function (teams, out) {
     playerContainer.style.display = 'grid';
     playerContainer.style.gridTemplateColumns = `repeat(${teams.length}, 1fr)`;
     playerContainer.innerHTML = '';
@@ -103,6 +117,11 @@ const displayTeams = function (teams) {
         playerContainer.insertAdjacentHTML('beforeend', teamHTML);
     });
     displayMessage.textContent = 'TEAMS:';
+    playerContainer.insertAdjacentHTML(
+        'beforeend',
+        out.length ? `<div class="playerContainer-out">OUT: ${out}</div>` : ''
+    );
 };
 
+// Reset UI
 const resetUI = function () {};
