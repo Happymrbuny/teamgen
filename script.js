@@ -69,7 +69,12 @@ generateTeamsBtn.addEventListener('click', function (e) {
 addPlayerBtn.addEventListener('click', function (e) {
     e.preventDefault();
     const playerName = playerInput.value.toUpperCase();
-    if (playerName.length > 0) {
+    if (playerName.length < 1) {
+        displayMessage.textContent =
+            'PLAYER NAME MUST BE AT LEAST 1 CHARACTER LONG';
+    } else if (allPlayers.includes(playerName)) {
+        displayMessage.textContent = 'CAN NOT ADD DUPLICATE PLAYERS';
+    } else {
         allPlayers.push(playerName);
         displayAllPlayers(allPlayers);
     }
