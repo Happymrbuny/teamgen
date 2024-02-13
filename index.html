@@ -3,51 +3,62 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/png" href="/team-logo.png" />
-
+        <link rel="shortcut icon" type="image/png" href="/teams.jpg" />
         <link
             href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap"
             rel="stylesheet"
         />
-
         <link rel="stylesheet" href="style.css" />
-        <title>Team-Generator</title>
+        <title>TeamGen Layout</title>
     </head>
-
     <body>
-        <nav>
-            <img src="teams.jpg" alt="Logo" class="logo" />
-            <p class="welcome">TEAM GENERATOR</p>
-        </nav>
-        <form class="form form_addPlayer">
-            <input
-                type="text"
-                placeholder="ENTER PLAYER NAME"
-                class="form_input form_input-addPlayer"
-            />
-            <button type="submit" class="form_btn form_btn-addPlayer">
-                ADD PLAYER
-            </button>
-            <input
-                type="number"
-                placeholder="HOW MANY TEAMS?"
-                class="form_input form_input-teamCount"
-            />
-            <select
-                name="oddPlayerOpt"
-                class="form_select form_select-oddPlayer"
-            >
-                <option value="out" selected>ODD PLAYER OUT</option>
-                <option value="in">ODD PLAYER IN</option>
-            </select>
-            <button class="form_btn form_btn-generateTeams">
-                GENERATE TEAMS
-            </button>
-            <button class="form_btn form_btn-reset">RESET</button>
-        </form>
-        <h2 class="displayMessage">ADD PLAYERS TO BEGIN</h2>
-        <div class="playerContainer"></div>
+        <main class="main">
+            <section class="section-header">
+                <header class="header">
+                    <!-- <div class="header-img-box"> -->
+                    <img src="teams.jpg" alt="Logo" class="logo" />
+                    <!-- </div> -->
+                    <h1 class="heading-primary">TeamGenerator</h1>
+                </header>
+            </section>
+            <section class="section-form">
+                <form class="form form--addPlayer">
+                    <input
+                        type="text"
+                        placeholder="ENTER PLAYER NAME"
+                        class="form-input form-input--addPlayer"
+                    />
+                    <button type="submit" class="form-btn form-btn--addPlayer">
+                        ADD PLAYER
+                    </button>
+                    <input
+                        type="number"
+                        placeholder="HOW MANY TEAMS?"
+                        class="form-input form-input--teamCount"
+                    />
+                    <select
+                        name="oddPlayerOpt"
+                        class="form-select form-select--oddPlayer"
+                    >
+                        <option value="out" selected>ODD PLAYER OUT</option>
+                        <option value="in">ODD PLAYER IN</option>
+                    </select>
+                    <button class="form-btn form-btn--generateTeams">
+                        GENERATE TEAMS
+                    </button>
+                    <button class="form-btn form-btn--reset">RESET</button>
+                </form>
+            </section>
+            <section class="section-playerDisplayWindow">
+                <div class="playerDisplayWindow">
+                    <h2 class="heading-secondary displayMessage">
+                        Player Display Window
+                    </h2>
+                    <div class="playerContainer"></div>
+                </div>
+            </section>
+            <footer class="footer">Developed by Aaron Phelps - 2023</footer>
+        </main>
         <script src="script.js"></script>
-        <footer class="footer">Developed by Aaron Phelps - 2023</footer>
     </body>
 </html>

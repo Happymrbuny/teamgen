@@ -2,14 +2,14 @@
 
 // Elements
 // Input Elements
-const playerInput = document.querySelector('.form_input-addPlayer');
-const teamCount = document.querySelector('.form_input-teamCount');
-const oddPlayerOpt = document.querySelector('.form_select-oddPlayer');
+const playerInput = document.querySelector('.form-input--addPlayer');
+const teamCount = document.querySelector('.form-input--teamCount');
+const oddPlayerOpt = document.querySelector('.form-select--oddPlayer');
 
 // Button Elements
-const addPlayerBtn = document.querySelector('.form_btn-addPlayer');
-const generateTeamsBtn = document.querySelector('.form_btn-generateTeams');
-const resetBtn = document.querySelector('.form_btn-reset');
+const addPlayerBtn = document.querySelector('.form-btn--addPlayer');
+const generateTeamsBtn = document.querySelector('.form-btn--generateTeams');
+const resetBtn = document.querySelector('.form-btn--reset');
 
 //Display Elements
 const playerContainer = document.querySelector('.playerContainer');
@@ -27,10 +27,9 @@ generateTeamsBtn.addEventListener('click', function (e) {
     const noTeams = teamCount.value;
     const tempMembers = [...allPlayers];
     const oddPlayerOut = oddPlayerOpt.value === 'out' ? true : false;
-    const out = [];
     // Randome member selector function
-    const randMember = (tempMembers) => console.log(tempMembers);
-    Math.floor(Math.random() * tempMembers);
+    const randMember = (tempMembers) =>
+        Math.floor(Math.random() * tempMembers.length);
 
     // If missing inputs
     if (!noTeams || !tempMembers.length)
@@ -48,9 +47,7 @@ generateTeamsBtn.addEventListener('click', function (e) {
             teams[i] = [];
             // Assign members to each team until team size is reached
             while (teams[i].length < teamSize) {
-                teams[i].push(
-                    tempMembers.splice(randMember(tempMembers), 1)[0]
-                );
+                teams[i].push(tempMembers.splice(randMember(tempMembers), 1));
             }
         }
         if (!oddPlayerOut) {
@@ -101,7 +98,7 @@ const displayAllPlayers = function () {
 
     allPlayers.forEach(function (player, i) {
         const html = `
-        <p class='playerContainer-${player}'>${player}<button class='playerContainer-removeBtn' onclick='removePlayer(${i})'>X</button></p>`;
+        <p class='added-player playerContainer-${player}'>${player}<button class='playerContainer-removeBtn' onclick='removePlayer(${i})'>X</button></p>`;
 
         playerContainer.insertAdjacentHTML('beforeend', html);
     });
